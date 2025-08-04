@@ -15,9 +15,13 @@ app.get('/',(req, res) => {     //call-back funktion mit 2 parameter request und
 }) ;                              
 
 app.get('/ressources',(req, res) => {   //call-back funktion mit 2 parameter request und response// REST API (Endpunkt) mit GET
-    const data = readFileSync(data_file, 'utf8');
-    const ressources = JSON.parse(data);
-    res.json(ressources);   // regeneriert eine Antwort,die zurückgegeben wird
+    try {
+        const data = readFileSync(data_file, 'utf8');
+        const ressources = JSON.parse(data);
+        res.json(ressources);   // regeneriert eine Antwort,die zurückgegeben wird
+    } catch (error) {
+        res.status(500).json({ error: 'Interner Serverfehler beim Laden der Daten'});
+    }
 });
 
 app.get('/users',(req, res) => {  //call-back funktion mit 2 parameter request und response//// REST API (Endpunkt) mit GET
