@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Ressource Catalog Microservice For Learning Path Generator App",
   "main": "index.js",
-  "type": "module", 
+  "type": "module",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
   "homepage": "https://github.com/printCelinaPabst/ressource_catalog_service#readme",
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

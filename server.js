@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath} from 'url';
 
 const app = express() ; // eine Instanz erstellen / Webanwendung
+app.use(express.json());
 
 const port = 5002; // personalisierte Portnummer
 const ___filename = fileURLToPath(import.meta.url); 
@@ -26,6 +27,25 @@ app.get('/ressources',(req, res) => {   //call-back funktion mit 2 parameter req
 
 app.get('/users',(req, res) => {  //call-back funktion mit 2 parameter request und response//// REST API (Endpunkt) mit GET
     res.send('Hier kommen die Users spaeter.');   // regeneriert eine Antwort,die zurückgegeben wird
+});
+
+app.get('/ressources/:id', (req, res) => {
+    try {
+        const ressourceId = req.params.id;
+        const data = readFileSync(data_file, 'utf8');
+        const ressources = JSON.parse(data);
+        const ressource = ressources.find(r => r.id === ressourceId)
+        
+        if (ressource) {
+            res.json(ressource);
+
+        } else {
+            res.status(404).json({ error: `Ressource mit ID ${ressourceId} nicht gefunden.` })
+
+    } 
+    } catch  (error) {}
+        res.status(500).json({ error: 'Interner Serverfehler beim Laden der Daten'});
+
 });
 
 
