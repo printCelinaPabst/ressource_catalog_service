@@ -5,7 +5,10 @@ const port = 5002; // personalisierte Portnummer
 
 const app = express() ; // eine Instanz erstellen / Webanwendung
 
+// Middleeware
 app.use(express.json());
+
+// Routes
 app.use('/ressources', ressourcesRouter)
                         
 

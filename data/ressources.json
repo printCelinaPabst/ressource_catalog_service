@@ -1,16 +1,28 @@
 [
-    {
-        "id": "1",
-        "title": "Einführung in die Webentwicklung",
-        "type": "Kurs",
-        "authorId": "a1b2c3d4",
-        "url": "http://example.com/webdev"
-    },
-    {
-        "id": "2",
-        "title": "Express.js-Tutorial",
-        "type": "Video",
-        "authorId": "a1b2c3d4",
-        "url": "http://example.com/expressjs"
-    }
+  {
+    "id": "1",
+    "title": "Einführung in die Webentwicklung",
+    "type": "Kurs",
+    "authorId": "a1b2c3d4",
+    "url": "http://example.com/webdev"
+  },
+  {
+    "id": "2",
+    "title": "Express.js-Tutorial",
+    "type": "Video",
+    "authorId": "a1b2c3d4",
+    "url": "http://example.com/expressjs"
+  },
+  {
+    "id": "c1da44ed-bd95-4f6c-be66-d25a8a93bd0f",
+    "title": "Einführung in Python",
+    "type": "Kurs",
+    "url": "http://example.com/python"
+  },
+  {
+    "id": "efa7e20a-1449-423c-b187-b88d74ddb8d6",
+    "title": "Einführung in Python",
+    "type": "Kurs",
+    "url": "http://example.com/python"
+  }
 ]
