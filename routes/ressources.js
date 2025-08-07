@@ -78,4 +78,50 @@ router.post('/', (req, res) => {
         res.status(500).json({ error: 'Interner Serverfehler beim Laden der Ressourcen-Daten.' });
     }
 })
+
+
+router.put('/:id', (req, res) => {
+    // 1. ID auslesen
+    const ressourceId = req.params.id;
+    const newData = req.body; 
+    
+    if (Object.keys(newData).lenght === 0) {
+        res.status(400).json
+    }
+
+    try {
+        // 2. Alle Ressourcen laden
+        const data = readFileSync(data_file, 'utf8');
+        const ressources = JSON.parse(data);
+
+        // 3. Die Ressource nach der ID suchen
+        // const resource = resources.find(r => r.id === resourceId);
+        const ressourceIndex = ressources.findIndex(r => r.id === ressourceId);
+
+        // 4. Wenn die Ressource nicht existiert - dann 404
+        if (ressourceIndex === -1) {
+            res.status(404).json({ error: `Ressource mit ID ${ressourceId} nicht gefunden.`});
+            return;
+        }
+
+        // 5. Wenn die Ressource existiert - updaten
+        ressources[ressourceIndex] = {...ressources[ressourceIndex], ...newData};
+
+        // 6. Updates in der Datei speichern.
+        writeFileSync(data_file, JSON.stringify(ressources, null, 2), 'utf8');
+
+        res.status(200).json(ressources[ressourceIndex]);
+
+    } catch(error) {
+        res.status(500).json({ error: 'Interner Serverfehler bei der Verarbeitung der Ressourcen-Daten.' });
+    }
+router.delete('/:id', () => {
+    const ressourceId = req.params.id;
+    const newData = req.body;
+
+})
+
+
+
+})
 export default router;

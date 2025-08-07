@@ -11,7 +11,8 @@
     "title": "Express.js-Tutorial",
     "type": "Video",
     "authorId": "a1b2c3d4",
-    "url": "http://example.com/expressjs"
+    "url": "http://example.com/expressjs",
+    "post": "hat funktioniert"
   },
   {
     "id": "c1da44ed-bd95-4f6c-be66-d25a8a93bd0f",
