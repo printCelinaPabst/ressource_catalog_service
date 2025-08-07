@@ -80,15 +80,16 @@ router.post('/', (req, res) => {
 })
 
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
     // 1. ID auslesen
     const ressourceId = req.params.id;
     const newData = req.body; 
     
-    if (Object.keys(newData).lenght === 0) {
-        res.status(400).json
+    if (!newData || Object.keys(newData).length === 0) {
+        res.status(400).json({ error: 'Keine Daten zum Aktualisieren vorhanden.' });
+        return;
     }
-
+    
     try {
         // 2. Alle Ressourcen laden
         const data = readFileSync(data_file, 'utf8');
@@ -115,13 +116,30 @@ router.put('/:id', (req, res) => {
     } catch(error) {
         res.status(500).json({ error: 'Interner Serverfehler bei der Verarbeitung der Ressourcen-Daten.' });
     }
-router.delete('/:id', () => {
-    const ressourceId = req.params.id;
-    const newData = req.body;
-
-})
 
 
+router.delete('/:id', (req, res, next) => {
+    const resourceId = req.params.id;
 
-})
+    try {
+        const data = readFileSync(data_file, 'utf8');
+        let ressources = JSON.parse(data);
+        const initialLength = ressources.length;
+        ressources = ressources.filter(r => r.id !== ressourceId);
+
+        if (ressources.length === initialLength) {
+            res.status(404).json({ error: `Ressource mit ID ${ressourceId} nicht gefunden.` });
+            return;
+        }
+
+        writeFileSync(data_file, JSON.stringify(ressources, null, 2), 'utf8');
+
+        res.status(204).end();
+
+    } catch (error) {
+        next(error);
+    }
+
+});
+
 export default router;
