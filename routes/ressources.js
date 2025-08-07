@@ -22,6 +22,7 @@ router.get('/',(req, res) => {   //call-back funktion mit 2 parameter request un
         res.json(ressources);   // regeneriert eine Antwort,die zurückgegeben wird
     } catch (error) {
         res.status(500).json({ error: 'Interner Serverfehler beim Laden der Daten'});
+        next(error);
     }
 });
 
@@ -42,6 +43,7 @@ router.get('/:id', (req, res) => {
     } 
     } catch  (error) {
         res.status(500).json({ error: 'Interner Serverfehler beim Laden der Daten'});
+        next(error);
     }
 });
 
@@ -76,6 +78,7 @@ router.post('/', (req, res) => {
 
     } catch (error) {
         res.status(500).json({ error: 'Interner Serverfehler beim Laden der Ressourcen-Daten.' });
+        next(error);
     }
 })
 
@@ -89,7 +92,7 @@ router.put('/:id', (req, res, next) => {
         res.status(400).json({ error: 'Keine Daten zum Aktualisieren vorhanden.' });
         return;
     }
-    
+
     try {
         // 2. Alle Ressourcen laden
         const data = readFileSync(data_file, 'utf8');
@@ -115,6 +118,7 @@ router.put('/:id', (req, res, next) => {
 
     } catch(error) {
         res.status(500).json({ error: 'Interner Serverfehler bei der Verarbeitung der Ressourcen-Daten.' });
+        next(error);
     }
 
 
